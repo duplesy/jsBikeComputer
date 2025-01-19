@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/drawable_ic_home_black_24dp.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/drawable/ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/drawable_ic_strava_logo.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/drawable/ic_strava_logo.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/drawable_ic_signal_0.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/drawable/ic_signal_0.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/xml_backup_rules.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/layout_activity_main.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/drawable_ic_signal_1.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/drawable/ic_signal_1.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/layout_activity_connections.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/layout/activity_connections.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/drawable_ic_signal_2.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/drawable/ic_signal_2.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/drawable/ic_notifications_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/layout_device_item.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/layout/device_item.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/mipmap-anydpi/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/drawable_ic_signal_selector.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/drawable/ic_signal_selector.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/drawable_ic_signal_3.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/drawable/ic_signal_3.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-merged_res-34:/mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "com.example.jsBikeComputer.app-main-35:/mipmap-anydpi/ic_launcher_round.xml"
+    }
+]

@@ -1,0 +1,274 @@
+/workspaces/jsBikeComputer/app/src/main/AndroidManifest.xml:30: Warning: Redundant label can be removed [RedundantLabel]
+            android:label="@string/app_name">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "RedundantLabel":
+   When an activity does not have a label attribute, it will use the one from
+   the application tag. Since the application has already specified the same
+   label, the label on this activity can be omitted.
+
+/workspaces/jsBikeComputer/app/build.gradle:34: Warning: A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.0 [GradleDependency]
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/build.gradle:35: Warning: A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.0 [GradleDependency]
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/build.gradle:37: Warning: A newer version of com.google.android.material:material than 1.11.0 is available: 1.12.0 [GradleDependency]
+    implementation 'com.google.android.material:material:1.11.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+/workspaces/jsBikeComputer/app/src/main/java/com/example/jsBikeComputer/DeviceAdapter.java:68: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NotifyDataSetChanged":
+   The RecyclerView adapter's onNotifyDataSetChanged method does not specify
+   what about the data set has changed, forcing any observers to assume that
+   all existing items and structure may no longer be valid. `LayoutManager`s
+   will be forced to fully rebind and relayout all visible views.
+
+/workspaces/jsBikeComputer/app/src/main/AndroidManifest.xml:25: Warning: Unnecessary; SDK_INT is always >= 33 [ObsoleteSdkInt]
+        tools:targetApi="33">
+        ~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "ObsoleteSdkInt":
+   This check flags version checks that are not necessary, because the
+   minSdkVersion (or surrounding known API level) is already at least as high
+   as the version checked for.
+
+   Similarly, it also looks for resources in -vNN folders, such as values-v14
+   where the version qualifier is less than or equal to the minSdkVersion,
+   where the contents should be merged into the best folder.
+
+/workspaces/jsBikeComputer/app/src/main/res/layout/device_item.xml:10: Warning: Use a layout_height of 0dp instead of wrap_content for better performance [InefficientWeight]
+        android:layout_height="wrap_content"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "InefficientWeight":
+   When only a single widget in a LinearLayout defines a weight, it is more
+   efficient to assign a width/height of 0dp to it since it will absorb all
+   the remaining space anyway. With a declared width/height of 0dp it does not
+   have to measure its own size first.
+
+/workspaces/jsBikeComputer/app/src/main/res/values/colors.xml:3: Warning: The resource R.color.purple_200 appears to be unused [UnusedResources]
+    <color name="purple_200">#FFBB86FC</color>
+           ~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/colors.xml:12: Warning: The resource R.color.status_success appears to be unused [UnusedResources]
+    <color name="status_success">#4CAF50</color>
+           ~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/colors.xml:13: Warning: The resource R.color.status_pending appears to be unused [UnusedResources]
+    <color name="status_pending">#FFA000</color>
+           ~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/colors.xml:14: Warning: The resource R.color.status_error appears to be unused [UnusedResources]
+    <color name="status_error">#F44336</color>
+           ~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/dimens.xml:3: Warning: The resource R.dimen.activity_horizontal_margin appears to be unused [UnusedResources]
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/dimens.xml:4: Warning: The resource R.dimen.activity_vertical_margin appears to be unused [UnusedResources]
+    <dimen name="activity_vertical_margin">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/dimens.xml:5: Warning: The resource R.dimen.fab_margin appears to be unused [UnusedResources]
+    <dimen name="fab_margin">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:4: Warning: The resource R.string.title_routes appears to be unused [UnusedResources]
+    <string name="title_routes">Routes</string>
+            ~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:7: Warning: The resource R.string.next appears to be unused [UnusedResources]
+    <string name="next">Next</string>
+            ~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:8: Warning: The resource R.string.previous appears to be unused [UnusedResources]
+    <string name="previous">Previous</string>
+            ~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:11: Warning: The resource R.string.welcome_message appears to be unused [UnusedResources]
+    <string name="welcome_message">Welcome %1$s %2$s</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:12: Warning: The resource R.string.upload_status appears to be unused [UnusedResources]
+    <string name="upload_status">Upload Status: %1$s</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:13: Warning: The resource R.string.please_login appears to be unused [UnusedResources]
+    <string name="please_login">Please login first</string>
+            ~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:14: Warning: The resource R.string.upload_failed appears to be unused [UnusedResources]
+    <string name="upload_failed">Upload failed</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:15: Warning: The resource R.string.loading_profile appears to be unused [UnusedResources]
+    <string name="loading_profile">Loading profile...</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:16: Warning: The resource R.string.unknown_device appears to be unused [UnusedResources]
+    <string name="unknown_device">Unknown Device</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:17: Warning: The resource R.string.device_name_format appears to be unused [UnusedResources]
+    <string name="device_name_format">%s</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:18: Warning: The resource R.string.device_address_format appears to be unused [UnusedResources]
+    <string name="device_address_format">%s</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:23: Warning: The resource R.string.signal_strength_format appears to be unused [UnusedResources]
+    <string name="signal_strength_format">%1$s (%2$d dBm)</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:24: Warning: The resource R.string.activities appears to be unused [UnusedResources]
+    <string name="activities">Activities</string>
+            ~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:25: Warning: The resource R.string.no_activities appears to be unused [UnusedResources]
+    <string name="no_activities">No activities recorded yet</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:26: Warning: The resource R.string.sync_activities appears to be unused [UnusedResources]
+    <string name="sync_activities">Sync Activities</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:27: Warning: The resource R.string.status_pending appears to be unused [UnusedResources]
+    <string name="status_pending">Pending</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:28: Warning: The resource R.string.status_uploading appears to be unused [UnusedResources]
+    <string name="status_uploading">Uploading</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:29: Warning: The resource R.string.status_uploaded appears to be unused [UnusedResources]
+    <string name="status_uploaded">Uploaded</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:30: Warning: The resource R.string.status_failed appears to be unused [UnusedResources]
+    <string name="status_failed">Failed</string>
+            ~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/values/themes.xml:17: Warning: The resource R.style.Base_Theme_BikeComputer appears to be unused [UnusedResources]
+    <style name="Base.Theme.BikeComputer" parent="Theme.Material3.DayNight.NoActionBar">
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+/workspaces/jsBikeComputer/app/src/main/res/layout/device_item.xml:8: Warning: This LinearLayout layout or its LinearLayout parent is unnecessary [UselessParent]
+    <LinearLayout
+     ~~~~~~~~~~~~
+
+   Explanation for issues of type "UselessParent":
+   A layout with children that has no siblings, is not a scrollview or a root
+   layout, and does not have a background, can be removed and have its
+   children moved directly into the parent for a flatter and more efficient
+   layout hierarchy.
+
+/workspaces/jsBikeComputer/app/src/main/res/layout/activity_connections.xml:22: Warning: This namespace declaration is redundant [RedundantNamespace]
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/layout/activity_connections.xml:23: Warning: This namespace declaration is redundant [RedundantNamespace]
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "RedundantNamespace":
+   In Android XML documents, only specify the namespace on the root/document
+   element. Namespace declarations elsewhere in the document are typically
+   accidental leftovers from copy/pasting XML from other files or
+   documentation.
+
+/workspaces/jsBikeComputer/app/src/main/res/layout/activity_connections.xml:22: Warning: Unused namespace declaration xmlns:android; already declared on the root element [UnusedNamespace]
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/layout/activity_connections.xml:23: Warning: Unused namespace declaration xmlns:app; already declared on the root element [UnusedNamespace]
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedNamespace":
+   Unused namespace declarations take up space and require processing that is
+   not necessary
+
+/workspaces/jsBikeComputer/app/src/main/res/values/string.xml:15: Warning: Replace "..." with ellipsis character (…, &#8230;) ? [TypographyEllipsis]
+    <string name="loading_profile">Loading profile...</string>
+                                   ~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "TypographyEllipsis":
+   You can replace the string "..." with a dedicated ellipsis character,
+   ellipsis character (u2026, &#8230;). This can help make the text more
+   readable.
+
+   https://en.wikipedia.org/wiki/Ellipsis
+
+/workspaces/jsBikeComputer/app/src/main/res/layout/activity_main.xml:58: Warning: Missing contentDescription attribute on image [ContentDescription]
+    <ImageView
+     ~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/layout/device_item.xml:36: Warning: Missing contentDescription attribute on image [ContentDescription]
+    <ImageView
+     ~~~~~~~~~
+
+   Explanation for issues of type "ContentDescription":
+   Non-textual widgets like ImageViews and ImageButtons should use the
+   contentDescription attribute to specify a textual description of the widget
+   such that screen readers and other accessibility tools can adequately
+   describe the user interface.
+
+   Note that elements in application screens that are purely decorative and do
+   not provide any content or enable a user action should not have
+   accessibility content descriptions. In this case, set their descriptions to
+   @null. If your app's minSdkVersion is 16 or higher, you can instead set
+   these graphical elements' android:importantForAccessibility attributes to
+   no.
+
+   Note that for text fields, you should not set both the hint and the
+   contentDescription attributes since the hint will never be shown. Just set
+   the hint.
+
+   https://developer.android.com/guide/topics/ui/accessibility/apps#special-cases
+
+/workspaces/jsBikeComputer/app/src/main/java/com/example/jsBikeComputer/DeviceAdapter.java:97: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                rssiText.setText(rssi + " dBm");
+                                 ~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/java/com/example/jsBikeComputer/DeviceAdapter.java:97: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                rssiText.setText(rssi + " dBm");
+                                        ~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+/workspaces/jsBikeComputer/app/src/main/res/layout/activity_main.xml:16: Warning: Hardcoded string "Device list", should use @string resource [HardcodedText]
+        android:text="Device list"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/layout/activity_main.xml:30: Warning: Hardcoded string "Press scan to start", should use @string resource [HardcodedText]
+        android:text="Press scan to start"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/layout/activity_main.xml:73: Warning: Hardcoded string "Scan", should use @string resource [HardcodedText]
+        android:text="Scan"
+        ~~~~~~~~~~~~~~~~~~~
+/workspaces/jsBikeComputer/app/src/main/res/layout/activity_main.xml:86: Warning: Hardcoded string "Connect", should use @string resource [HardcodedText]
+        android:text="Connect"
+        ~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+0 errors, 48 warnings

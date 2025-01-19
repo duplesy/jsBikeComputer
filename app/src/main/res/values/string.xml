@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">BikeComputer</string>
+    <string name="title_devices">Devices</string>
+    <string name="title_routes">Routes</string>
+    <string name="title_connections">Connections</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="login_with_strava">Login with Strava</string>
+    <string name="upload_activity">Upload Activity</string>
+    <string name="welcome_message">Welcome %1$s %2$s</string>
+    <string name="upload_status">Upload Status: %1$s</string>
+    <string name="please_login">Please login first</string>
+    <string name="upload_failed">Upload failed</string>
+    <string name="loading_profile">Loading profile...</string>
+    <string name="unknown_device">Unknown Device</string>
+    <string name="device_name_format">%s</string>
+    <string name="device_address_format">%s</string>
+    <string name="signal_excellent">Excellent</string>
+    <string name="signal_good">Good</string>
+    <string name="signal_fair">Fair</string>
+    <string name="signal_poor">Poor</string>
+    <string name="signal_strength_format">%1$s (%2$d dBm)</string>
+    <string name="activities">Activities</string>
+    <string name="no_activities">No activities recorded yet</string>
+    <string name="sync_activities">Sync Activities</string>
+    <string name="status_pending">Pending</string>
+    <string name="status_uploading">Uploading</string>
+    <string name="status_uploaded">Uploaded</string>
+    <string name="status_failed">Failed</string>
+    </resources>

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.example.jsBikeComputer.app-mergeReleaseResources-33:/layout/activity_connections.xml",
+        "source": "com.example.jsBikeComputer.app-main-35:/layout/activity_connections.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-mergeReleaseResources-33:/layout/activity_main.xml",
+        "source": "com.example.jsBikeComputer.app-main-35:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.jsBikeComputer.app-mergeReleaseResources-33:/layout/device_item.xml",
+        "source": "com.example.jsBikeComputer.app-main-35:/layout/device_item.xml"
+    }
+]

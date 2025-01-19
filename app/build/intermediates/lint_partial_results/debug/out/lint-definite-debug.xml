@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.1.4" type="incidents">
+
+    <incident
+        id="RedundantLabel"
+        severity="warning"
+        message="Redundant label can be removed">
+        <fix-attribute
+            description="Delete label"
+            namespace="http://schemas.android.com/apk/res/android"
+            attribute="label"/>
+        <location
+            file="${:app*debug*sourceProvider*0*manifest*0}"
+            line="30"
+            column="13"
+            startOffset="1397"
+            endLine="30"
+            endColumn="45"
+            endOffset="1429"/>
+    </incident>
+
+    <incident
+        id="RedundantNamespace"
+        severity="warning"
+        message="This namespace declaration is redundant">
+        <fix-attribute
+            description="Delete namespace"
+            attribute="xmlns:android"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_connections.xml"
+            line="22"
+            column="19"
+            startOffset="1017"
+            endLine="22"
+            endColumn="77"
+            endOffset="1075"/>
+    </incident>
+
+    <incident
+        id="RedundantNamespace"
+        severity="warning"
+        message="This namespace declaration is redundant">
+        <fix-attribute
+            description="Delete namespace"
+            attribute="xmlns:app"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_connections.xml"
+            line="23"
+            column="9"
+            startOffset="1084"
+            endLine="23"
+            endColumn="60"
+            endOffset="1135"/>
+    </incident>
+
+    <incident
+        id="UnusedNamespace"
+        severity="warning"
+        message="Unused namespace declaration xmlns:android; already declared on the root element">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_connections.xml"
+            line="22"
+            column="19"
+            startOffset="1017"
+            endLine="22"
+            endColumn="77"
+            endOffset="1075"/>
+    </incident>
+
+    <incident
+        id="UnusedNamespace"
+        severity="warning"
+        message="Unused namespace declaration xmlns:app; already declared on the root element">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_connections.xml"
+            line="23"
+            column="9"
+            startOffset="1084"
+            endLine="23"
+            endColumn="60"
+            endOffset="1135"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Device list&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="16"
+            column="9"
+            startOffset="588"
+            endLine="16"
+            endColumn="35"
+            endOffset="614"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Press scan to start&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="30"
+            column="9"
+            startOffset="1090"
+            endLine="30"
+            endColumn="43"
+            endOffset="1124"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                dot="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="58"
+            column="6"
+            startOffset="2185"
+            endLine="58"
+            endColumn="15"
+            endOffset="2194"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Scan&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="73"
+            column="9"
+            startOffset="2713"
+            endLine="73"
+            endColumn="28"
+            endOffset="2732"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Connect&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="86"
+            column="9"
+            startOffset="3193"
+            endLine="86"
+            endColumn="31"
+            endOffset="3215"/>
+    </incident>
+
+    <incident
+        id="InefficientWeight"
+        severity="warning"
+        message="Use a `layout_height` of `0dp` instead of `wrap_content` for better performance">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/device_item.xml"
+            line="10"
+            column="9"
+            startOffset="360"
+            endLine="10"
+            endColumn="45"
+            endOffset="396"/>
+    </incident>
+
+    <incident
+        id="UselessParent"
+        severity="warning"
+        message="This `LinearLayout` layout or its `LinearLayout` parent is unnecessary">
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/device_item.xml"
+            line="8"
+            column="6"
+            startOffset="295"
+            endLine="8"
+            endColumn="18"
+            endOffset="307"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                dot="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/layout/device_item.xml"
+            line="36"
+            column="6"
+            startOffset="1216"
+            endLine="36"
+            endColumn="15"
+            endOffset="1225"/>
+    </incident>
+
+    <incident
+        id="TypographyEllipsis"
+        severity="warning"
+        message="Replace &quot;...&quot; with ellipsis character (…, &amp;#8230;) ?">
+        <fix-replace
+            description="Replace with …"
+            oldString="..."
+            replacement="…"/>
+        <location
+            file="${:app*debug*sourceProvider*0*resDir*0}/values/string.xml"
+            line="15"
+            column="36"
+            startOffset="756"
+            endLine="15"
+            endColumn="54"
+            endOffset="774"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/jsBikeComputer/DeviceAdapter.java"
+            line="68"
+            column="9"
+            startOffset="2104"
+            endLine="68"
+            endColumn="31"
+            endOffset="2126"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/jsBikeComputer/DeviceAdapter.java"
+            line="97"
+            column="34"
+            startOffset="3355"
+            endLine="97"
+            endColumn="47"
+            endOffset="3368"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/jsBikeComputer/DeviceAdapter.java"
+            line="97"
+            column="41"
+            startOffset="3362"
+            endLine="97"
+            endColumn="47"
+            endOffset="3368"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.0">
+        <fix-replace
+            description="Change to 1.7.0"
+            family="Update versions"
+            oldString="1.6.1"
+            replacement="1.7.0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="34"
+            column="20"
+            startOffset="776"
+            endLine="34"
+            endColumn="56"
+            endOffset="812"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.0">
+        <fix-replace
+            description="Change to 2.2.0"
+            family="Update versions"
+            oldString="2.1.4"
+            replacement="2.2.0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="35"
+            column="20"
+            startOffset="832"
+            endLine="35"
+            endColumn="70"
+            endOffset="882"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.android.material:material than 1.11.0 is available: 1.12.0">
+        <fix-replace
+            description="Change to 1.12.0"
+            family="Update versions"
+            oldString="1.11.0"
+            replacement="1.12.0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="37"
+            column="20"
+            startOffset="971"
+            endLine="37"
+            endColumn="65"
+            endOffset="1016"/>
+    </incident>
+
+</incidents>
