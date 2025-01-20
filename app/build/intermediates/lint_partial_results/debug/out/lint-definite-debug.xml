@@ -247,10 +247,10 @@
             file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/jsBikeComputer/DeviceAdapter.java"
             line="68"
             column="9"
-            startOffset="2104"
+            startOffset="2106"
             endLine="68"
             endColumn="31"
-            endOffset="2126"/>
+            endOffset="2128"/>
     </incident>
 
     <incident
@@ -261,10 +261,10 @@
             file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/jsBikeComputer/DeviceAdapter.java"
             line="97"
             column="34"
-            startOffset="3355"
+            startOffset="3357"
             endLine="97"
             endColumn="47"
-            endOffset="3368"/>
+            endOffset="3370"/>
     </incident>
 
     <incident
@@ -275,10 +275,10 @@
             file="${:app*debug*sourceProvider*0*javaDir*0}/com/example/jsBikeComputer/DeviceAdapter.java"
             line="97"
             column="41"
-            startOffset="3362"
+            startOffset="3364"
             endLine="97"
             endColumn="47"
-            endOffset="3368"/>
+            endOffset="3370"/>
     </incident>
 
     <incident

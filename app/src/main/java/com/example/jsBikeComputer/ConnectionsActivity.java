@@ -1,4 +1,4 @@
-package com.example.bikecomputer;
+package com.example.jsBikeComputer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -310,6 +310,8 @@ public class ConnectionsActivity extends AppCompatActivity {
 
     private void uploadActivityExample() {
         // Example GPX data - replace with real GPX data from your app
+
+        /* Upload whatever is synced from esp32 */
         String sampleGpx = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><gpx version=\"1.1\">...</gpx>";
 
         stravaApi.uploadActivity(sampleGpx, "My Ride", "Great ride today!", "false", "false",

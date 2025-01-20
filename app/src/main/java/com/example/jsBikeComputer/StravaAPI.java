@@ -1,4 +1,4 @@
-package com.example.bikecomputer;
+package com.example.jsBikeComputer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

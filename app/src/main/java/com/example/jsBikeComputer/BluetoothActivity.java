@@ -1,4 +1,4 @@
-package com.example.bikecomputer;
+package com.example.jsBikeComputer;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

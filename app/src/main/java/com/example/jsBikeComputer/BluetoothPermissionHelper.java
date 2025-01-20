@@ -1,4 +1,4 @@
-package com.example.bikecomputer;
+package com.example.jsBikeComputer;
 
 import android.content.Context;
 import android.Manifest;

@@ -1,5 +1,5 @@
 // DeviceAdapter.java
-package com.example.bikecomputer;
+package com.example.jsBikeComputer;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.pm.PackageManager;
