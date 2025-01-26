@@ -10,12 +10,9 @@ buildscript {
     {
         google()
         mavenCentral()
+        maven { url "https://www.jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.4'
+        classpath 'com.android.tools.build:gradle:8.8.0'
     }
-}
-
-tasks.register('clean', Delete) {
-    delete rootProject.buildDir
 }
