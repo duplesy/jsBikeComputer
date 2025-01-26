@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.view.MenuItem;
-import com.example.jsBikeComputer.R;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKey;
-import androidx.security.crypto.MasterKeys;
 
 import org.json.JSONObject;
 import java.io.IOException;
@@ -33,7 +31,7 @@ public class ConnectionsActivity extends AppCompatActivity {
 
     private static final String CLIENT_ID = "145021";
     private static final String CLIENT_SECRET = "69958b027f4d325c7be695094c3e0f35f7f0cff2";
-    private static final String REDIRECT_URI = "http://jsbikecomputer.app/callback";
+    private static final String REDIRECT_URI = "https://jsbikecomputer.app/callback";
     private static final String STRAVA_AUTH_URL = "https://www.strava.com/oauth/mobile/authorize";
     private static final String STRAVA_TOKEN_URL = "https://www.strava.com/oauth/token";
 
@@ -58,7 +56,7 @@ public class ConnectionsActivity extends AppCompatActivity {
                 }
                 else if(item.getItemId() == R.id.navigation_devices)
                 {
-                        startActivity(new Intent(getApplicationContext(),BluetoothActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
@@ -73,6 +71,8 @@ public class ConnectionsActivity extends AppCompatActivity {
             initializeStravaApi();
             loadAthleteProfile();
         }
+
+        handleIntent(getIntent());
     }
 
     private void setupEncryptedPreferences() {
@@ -137,11 +137,17 @@ public class ConnectionsActivity extends AppCompatActivity {
                 .appendQueryParameter("scope", "activity:write,activity:read")
                 .build();
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, authUri);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, authUri);
+            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } catch (Exception e) {
+            Log.e("ConnectionsActivity", "Error launching auth intent", e);
+            Toast.makeText(this, "Unable to launch authentication", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    @Override
+/*    @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
@@ -152,6 +158,54 @@ public class ConnectionsActivity extends AppCompatActivity {
                 String code = uri.getQueryParameter("code");
                 if (code != null) {
                     Log.d("ConnectionsActivity", "Authorization code: " + code);
+                    exchangeCodeForToken(code);
+                } else {
+                    Log.e("ConnectionsActivity", "Authorization failed: No code");
+                }
+            }
+        }
+    }*/
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+
+    }
+
+    private void handleIntent(Intent intent) {
+        Log.d("ConnectionsActivity", "onNewIntent called");
+
+        if (intent == null) {
+            Log.e("ConnectionsActivity", "Received null intent");
+            return;
+        }
+
+        String action = intent.getAction();
+        Uri uri = intent.getData();
+
+        Log.d("ConnectionsActivity", "Intent Action: " + action);
+        Log.d("ConnectionsActivity", "Intent Data: " + (uri != null ? uri.toString() : "null"));
+
+        if (uri != null) {
+            Log.d("ConnectionsActivity", "Full URI Details:");
+            Log.d("ConnectionsActivity", "Scheme: " + uri.getScheme());
+            Log.d("ConnectionsActivity", "Host: " + uri.getHost());
+            Log.d("ConnectionsActivity", "Path: " + uri.getPath());
+
+            // Log all query parameters
+            for (String key : uri.getQueryParameterNames()) {
+                Log.d("ConnectionsActivity", "Query Param - " + key + ": " + uri.getQueryParameter(key));
+            }
+
+            if (uri.toString().startsWith(REDIRECT_URI)) {
+                String code = uri.getQueryParameter("code");
+
+                Log.d("ConnectionsActivity", "Matching Redirect URI");
+                Log.d("ConnectionsActivity", "Code: " + code);
+
+                if (code != null) {
+                    Log.d("ConnectionsActivity", "Exchanging code for token");
                     exchangeCodeForToken(code);
                 } else {
                     Log.e("ConnectionsActivity", "Authorization failed: No code");
@@ -176,6 +230,8 @@ public class ConnectionsActivity extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                Log.e("ConnectionsActivity", "Token Exchange Failure", e);
+
                 runOnUiThread(() ->
                         Toast.makeText(ConnectionsActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show()
                 );
