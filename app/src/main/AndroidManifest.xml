@@ -4,14 +4,25 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Previous permissions -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation"
+        tools:targetApi="s" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+
+    <!-- Add this purpose declaration for Android 16+ -->
+    <uses-permission-sdk-23 android:name="android.permission.USE_COMPANION_DEVICE" />
+
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +34,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.jsBikeComputer"
         android:networkSecurityConfig="@xml/network_security_config">
+        <meta-data
+            android:name="android.bluetooth.connection_purpose"
+            android:value="@string/bluetooth_purpose"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
