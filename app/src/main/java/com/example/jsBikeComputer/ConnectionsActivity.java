@@ -2,9 +2,10 @@ package com.example.jsBikeComputer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
-import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,13 +20,20 @@ import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKey;
 
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import okhttp3.*;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class ConnectionsActivity extends AppCompatActivity {
 
@@ -35,10 +43,17 @@ public class ConnectionsActivity extends AppCompatActivity {
     private static final String STRAVA_AUTH_URL = "https://www.strava.com/oauth/mobile/authorize";
     private static final String STRAVA_TOKEN_URL = "https://www.strava.com/oauth/token";
 
+    private static final String TAG = "BikeComputerBLE";
+
     private EncryptedSharedPreferences encryptedPrefs;
     private final OkHttpClient client = new OkHttpClient();
     private StravaAPI stravaApi;
     private TextView profileText;
+
+    private TextView connStatusText;
+
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +63,18 @@ public class ConnectionsActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(R.id.navigation_devices);
 
-        navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId() == R.id.navigation_connections){
-                        return true;
-                }
-                else if(item.getItemId() == R.id.navigation_devices)
-                {
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
+        navView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if(itemId == R.id.navigation_connections){
+                    return true;
             }
+            else if(itemId == R.id.navigation_devices)
+            {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(0,0);
+                return true;
+            }
+            return false;
         });
 
         setupEncryptedPreferences();
@@ -87,6 +100,7 @@ public class ConnectionsActivity extends AppCompatActivity {
 
             MasterKey masterKey = new MasterKey.Builder(getApplicationContext())
                     .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                    //.setKeyGenParameterSpec(spec)
                     .build();
 
             encryptedPrefs = (EncryptedSharedPreferences) EncryptedSharedPreferences.create(
@@ -108,10 +122,12 @@ public class ConnectionsActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.loginButton);
         Button uploadButton = findViewById(R.id.uploadButton);
         profileText = findViewById(R.id.profileText);
+        connStatusText = findViewById(R.id.connStatusText);
 
         loginButton.setOnClickListener(v -> {
             if (!hasValidTokens()) {
                 initiateStravaLogin();
+                loadAthleteProfile();
             } else {
                 Toast.makeText(this, "Already logged in!", Toast.LENGTH_SHORT).show();
             }
@@ -139,7 +155,9 @@ public class ConnectionsActivity extends AppCompatActivity {
 
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW, authUri);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         } catch (Exception e) {
             Log.e("ConnectionsActivity", "Error launching auth intent", e);
@@ -188,6 +206,10 @@ public class ConnectionsActivity extends AppCompatActivity {
         Log.d("ConnectionsActivity", "Intent Data: " + (uri != null ? uri.toString() : "null"));
 
         if (uri != null) {
+            runOnUiThread(() ->
+                    Toast.makeText(this, "Received URI: " + uri.toString(), Toast.LENGTH_LONG).show()
+            );
+
             Log.d("ConnectionsActivity", "Full URI Details:");
             Log.d("ConnectionsActivity", "Scheme: " + uri.getScheme());
             Log.d("ConnectionsActivity", "Host: " + uri.getHost());
@@ -229,7 +251,7 @@ public class ConnectionsActivity extends AppCompatActivity {
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 Log.e("ConnectionsActivity", "Token Exchange Failure", e);
 
                 runOnUiThread(() ->
@@ -238,8 +260,9 @@ public class ConnectionsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
                 try {
+                    assert response.body() != null;
                     String body = response.body().string();
                     JSONObject json = new JSONObject(body);
 
@@ -279,7 +302,7 @@ public class ConnectionsActivity extends AppCompatActivity {
 
     private void loadAthleteProfile() {
         if (stravaApi != null) {
-            stravaApi.getAthleteProfile(new ApiCallback<JSONObject>() {
+            stravaApi.getAthleteProfile(new ApiCallback<>() {
                 @Override
                 public void onSuccess(JSONObject result) {
                     runOnUiThread(() -> {
@@ -330,7 +353,7 @@ public class ConnectionsActivity extends AppCompatActivity {
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 runOnUiThread(() -> {
                     Toast.makeText(ConnectionsActivity.this, "Token refresh failed", Toast.LENGTH_SHORT).show();
                     initiateStravaLogin();
@@ -338,8 +361,9 @@ public class ConnectionsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) {
                 try {
+                    assert response.body() != null;
                     String body = response.body().string();
                     JSONObject json = new JSONObject(body);
 
@@ -364,41 +388,127 @@ public class ConnectionsActivity extends AppCompatActivity {
         });
     }
 
-    private void uploadActivityExample() {
-        // Example GPX data - replace with real GPX data from your app
+    private void uploadActivityExample()  {
+        // Get all saved FIT files from app's internal storage
+        List<File> fitFiles = getAllSavedFitFiles();
 
-        /* Upload whatever is synced from esp32 */
-        String sampleGpx = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><gpx version=\"1.1\">...</gpx>";
+        if (fitFiles.isEmpty()) {
+            Toast.makeText(this, "No FIT files found to upload", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        stravaApi.uploadActivity(sampleGpx, "My Ride", "Great ride today!", "false", "false",
-                new ApiCallback<JSONObject>() {
-                    @Override
-                    public void onSuccess(JSONObject result) {
-                        try {
-                            String uploadId = result.getString("id");
-                            checkUploadStatus(uploadId);
-                        } catch (Exception e) {
-                            Log.e("Connections", "Error parsing upload response", e);
-                            runOnUiThread(() ->
-                                    Toast.makeText(ConnectionsActivity.this, "Error processing upload", Toast.LENGTH_SHORT).show()
-                            );
-                        }
-                    }
+        // Show progress to user
+        updateStatus("Found " + fitFiles.size() + " files to upload to Strava");
 
-                    @Override
-                    public void onFailure(Exception e) {
-                        runOnUiThread(() -> {
-                            Toast.makeText(ConnectionsActivity.this, "Upload failed", Toast.LENGTH_SHORT).show();
-                            if (e.getMessage() != null && e.getMessage().contains("401")) {
-                                refreshToken();
+        // Process files one by one
+        uploadNextFileToStrava(fitFiles, 0);
+    }
+
+    private List<File> getAllSavedFitFiles() {
+        List<File> fitFiles = new ArrayList<>();
+        File internalDir = getFilesDir();
+        File[] files = internalDir.listFiles();
+
+        if (files != null) {
+            for (File file : files) {
+                // Check if file is a FIT file
+                if (file.isFile() && file.getName().endsWith(".tcx")) {
+                    fitFiles.add(file);
+                }
+            }
+        }
+
+        return fitFiles;
+    }
+
+    private void uploadNextFileToStrava(List<File> files, int index) {
+        try {
+            if (index >= files.size()) {
+                // All files uploaded
+                updateStatus("All files uploaded to Strava");
+                return;
+            }
+
+            File fileToUpload = files.get(index);
+            updateStatus("Uploading " + fileToUpload.getName() + " (" + (index + 1) + "/" + files.size() + ")");
+
+            // Start the upload process for this file
+            uploadFileToStrava(files, index);//
+            deleteFile(fileToUpload.getName());
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    void uploadFileToStrava(List<File> files, int index) {
+        try {
+            // Read file content
+            byte[] fileContent = readFileToByteArray(files.get(index));
+
+            // Convert from FIT to GPX if needed
+            // Note: Since your uploadActivity method expects GPX,
+            // you might need to convert FIT to GPX or modify the uploadActivity
+            // method to support FIT files directly.
+
+            String activityName = "Bike Ride " + new SimpleDateFormat("yyyy-MM-dd HH:mm",
+                    Locale.US).format(new Date());
+            String description = "Uploaded from JSBikeComputer";
+
+            stravaApi.uploadActivity(
+                    new String(fileContent), // If this really needs GPX, you would need to convert from FIT
+                    activityName,
+                    description,
+                    "false", // trainer
+                    "false", // commute
+                    new ApiCallback<>() {
+                        @Override
+                        public void onSuccess(JSONObject result) {
+                            try {
+                                String uploadId = result.getString("id");
+                                checkUploadStatus(uploadId);
+
+                                runOnUiThread(() -> {
+                                    updateStatus("File uploaded successfully: " + files.get(index).getName());
+
+                                    // Move to the next file
+                                    uploadNextFileToStrava(files, index + 1);
+                                });
+                            } catch (Exception e) {
+                                Log.e("Connections", "Error parsing upload response", e);
+                                runOnUiThread(() ->
+                                        Toast.makeText(ConnectionsActivity.this, "Error processing upload", Toast.LENGTH_SHORT).show()
+                                );
                             }
-                        });
-                    }
-                });
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            runOnUiThread(() -> {
+                                Toast.makeText(ConnectionsActivity.this, "Upload failed", Toast.LENGTH_SHORT).show();
+                                if (e.getMessage() != null && e.getMessage().contains("401")) {
+                                    refreshToken();
+                                }
+                                uploadNextFileToStrava(files, index+1);
+                            });
+                        }
+                    });
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private byte[] readFileToByteArray(File file)  {
+        byte[] buffer = new byte[(int) file.length()];
+        try (FileInputStream fis = new FileInputStream(file)) {
+            int bytesRead = fis.read(buffer);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return buffer;
     }
 
     private void checkUploadStatus(String uploadId) {
-        stravaApi.checkUploadStatus(uploadId, new ApiCallback<JSONObject>() {
+        stravaApi.checkUploadStatus(uploadId, new ApiCallback<>() {
             @Override
             public void onSuccess(JSONObject result) {
                 try {
@@ -419,6 +529,13 @@ public class ConnectionsActivity extends AppCompatActivity {
                         Toast.makeText(ConnectionsActivity.this, "Error checking upload status", Toast.LENGTH_SHORT).show()
                 );
             }
+        });
+    }
+
+    private void updateStatus(String message) {
+        mainHandler.post(() -> {
+            Log.d(TAG, message);
+            connStatusText.setText(message);
         });
     }
 }
