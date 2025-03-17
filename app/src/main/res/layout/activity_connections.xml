@@ -88,6 +88,18 @@
         app:strokeColor="@color/strava_orange_dark"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
+        <!-- Status Text -->
+        <TextView
+            android:id="@+id/connStatusText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Press button to start"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@id/textView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
