@@ -10,11 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.Manifest;
-import com.example.jsBikeComputer.R;
+
 import androidx.core.app.ActivityCompat;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import android.content.Context;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder> {
-    private List<BluetoothDevice> devices = new ArrayList<>();
+    private List<BluetoothDevice> devices ;
     private final Map<String, Integer> deviceRssiMap;
     private final OnDeviceClickListener listener;
 
@@ -31,9 +30,9 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
         void onDeviceClick(BluetoothDevice device);
     }
 
-    public DeviceAdapter(List<BluetoothDevice> devices, OnDeviceClickListener listener) {
+    public  DeviceAdapter(List<BluetoothDevice> devices, OnDeviceClickListener listener) {
         this.listener = listener;
-        this.devices = devices;
+        this.devices = new ArrayList<>(devices);
         this.deviceRssiMap = new HashMap<>();
     }
 
@@ -68,6 +67,10 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
         notifyDataSetChanged();
     }
 
+    public void updateRssi(String deviceAddress, int rssi) {
+        deviceRssiMap.put(deviceAddress, rssi);
+        notifyDataSetChanged();
+    }
     class DeviceViewHolder extends RecyclerView.ViewHolder {
         private final TextView nameText;
         private final TextView addressText;
@@ -92,15 +95,24 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.DeviceView
                 String name = device.getName();
                 nameText.setText(name != null ? name : "Unknown Device");
                 addressText.setText(device.getAddress());
-                
-                rssi = deviceRssiMap.get(device);
-                rssiText.setText(rssi + " dBm");
-                
-                // Convert RSSI to signal strength percentage
-                int signalPercentage = Math.min(100, Math.max(0, (rssi + 100) * 2));
-                signalStrength.setProgress(signalPercentage);
 
-                itemView.setOnClickListener(v -> listener.onDeviceClick(device));
+                Integer rssi = deviceRssiMap.get(device.getAddress());
+                if (rssi != null) {
+                    rssi = deviceRssiMap.get(device);
+                    rssiText.setText(rssi + " dBm");
+
+                    // Convert RSSI to signal strength percentage
+                    int signalPercentage = Math.min(100, Math.max(0, (rssi + 100) * 2));
+                    signalStrength.setProgress(signalPercentage);
+                }else {
+                    rssiText.setText("N/A");
+                    signalStrength.setProgress(0);
+                }
+                itemView.setOnClickListener(v -> {
+                    if (listener != null) {
+                        listener.onDeviceClick(device);
+                    }
+                });
             }
         }
     }
